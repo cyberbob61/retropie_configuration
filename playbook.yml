@@ -1,16 +1,37 @@
 - name: retropie
   hosts: all
   become: yes
+  
   tasks:
+  # ubuntu apt upgrade
     - name: Upgrade APT
       apt:
         update_cache: yes
         upgrade: yes
         
-    - name: Upgrade RetroPie packages
-      shell: |
-        sudo /home/pi/RetroPie-Setup/retropie_setup.sh --update
+  # retropie upgrade
+    - name: git pull RetroPie-Setup
+      command: git pull
+      args:
+        chdir: /home/pi/RetroPie-Setup
 
+    - name: Updating raspbiantools apt_upgrade
+      command: sudo __nodialog=1 ./retropie_packages.sh raspbiantools apt_upgrade
+      args:
+        chdir: /home/pi/RetroPie-Setup
+
+    - name: post_update
+      command: sudo __nodialog=1 ./retropie_packages.sh setup post_update
+      args:
+        chdir: /home/pi/RetroPie-Setup
+
+    - name: update_packages
+      command: sudo __nodialog=1 ./retropie_packages.sh setup update_packages
+      args:
+        chdir: /home/pi/RetroPie-Setup
+        
+    # retropie configuration
+    # nes configuration
     - name: create a file runner_nes.sh
       copy:
         dest: /opt/retropie/configs/nes/runner_nes.sh
