@@ -2,10 +2,12 @@
   hosts: all
   become: yes
   tasks:
-    - name: Update and upgrade packages
+    - name: Update package cache
       apt:
         update_cache: yes
-        upgrade: yes
+
+    - name: Upgrade installed packages
+      command: apt upgrade -y
 
     - name: create a file runner_nes.sh
       copy:
