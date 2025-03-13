@@ -4,11 +4,9 @@
   
   tasks:
   # ubuntu apt upgrade
-    - name: Upgrade APT
-      apt:
-        update_cache: yes
-        upgrade: yes
-        
+    - name: Ubuntu upgrade
+      command: apt update -y && apt upgrade -y --allow-downgrades && apt autoremove -y
+  
   # retropie upgrade
     - name: git pull RetroPie-Setup
       command: git pull
