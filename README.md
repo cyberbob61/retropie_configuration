@@ -11,5 +11,7 @@
 ```
 
 ```bash
-ansible-playbook playbook.yml -i <ip>, -u pi --ask-pass --ask-become-pass
+pipx install --include-deps ansible && sudo apt install pipx sshpass -y
+
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook playbook.yml -i "192.168.1.9," -u pi --ask-pass --ask-become-pass
 ```
