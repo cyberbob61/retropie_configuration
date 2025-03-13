@@ -4,9 +4,17 @@
   
   tasks:
   # ubuntu apt upgrade
-    - name: Ubuntu upgrade
-      command: apt update -y && apt upgrade -y --allow-downgrades && apt autoremove -y
+    - name: Update apt package list
       become: true
+      command: apt update
+    
+    - name: Upgrade packages
+      become: true
+      command: apt upgrade -y --allow-downgrades
+    
+    - name: Autoremove unnecessary packages
+      become: true
+      command: apt autoremove -y
   
   # retropie upgrade
     - name: git pull RetroPie-Setup
