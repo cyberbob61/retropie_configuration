@@ -38,12 +38,17 @@
         chdir: /home/pi/RetroPie-Setup
         
     # retropie configuration
-
+    - name: ffmpeg install
+      become: true
+      command: apt install ffmpeg -y
+      
     - name: Create directory /home/pi/videos
       file:
         path: /home/pi/videos
         state: directory
         mode: '0755'
+
+        
 
     # nes configuration
     - name: create a file runner_nes.sh
