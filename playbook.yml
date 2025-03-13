@@ -1,0 +1,7 @@
+- name: retropie
+  hosts: all
+  become: yes
+  tasks:
+    - name: apt upgrade
+      apt:
+        update_cache: yes
