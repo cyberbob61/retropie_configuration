@@ -38,6 +38,13 @@
         chdir: /home/pi/RetroPie-Setup
         
     # retropie configuration
+
+    - name: Create directory /home/pi/videos
+      file:
+        path: /home/pi/videos
+        state: directory
+        mode: '0755'
+
     # nes configuration
     - name: create a file runner_nes.sh
       copy:
