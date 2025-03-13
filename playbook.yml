@@ -5,3 +5,24 @@
     - name: apt upgrade
       apt:
         update_cache: yes
+
+    - name: create a file runner_nes.sh
+      copy:
+        dest: /opt/retropie/configs/nes/runner_nes.sh
+        content: |
+          #!/bin/bash
+          TIMESTAMP=$(date +"%d-%m-%Y_%H-%M-%S")
+          /opt/retropie/emulators/retroarch/bin/retroarch \
+            -L /opt/retropie/libretrocores/lr-nestopia/nestopia_libretro.so \
+            --record "/home/pi/videos/$TIMESTAMP.mp4" \
+            --config /opt/retropie/configs/nes/retroarch.cfg "$1"
+        mode: '0755'
+
+    - name: reconfigure emulators.cfg for nes
+      copy:
+        dest: /opt/retropie/configs/nes/emulators.cfg
+        content: |
+          default = "lr-nestopia"
+          lr-nestopia = "/opt/retropie/configs/nes/runner_nes.sh %ROM%"
+        mode: '0644'
+        force: yes
