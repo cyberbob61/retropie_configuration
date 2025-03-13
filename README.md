@@ -5,9 +5,9 @@
 # how to run
 ```
 1. write an image to a flash card
-2. connect to network (wireless or ethernet) to get an IP address
-3. configure login password
-4. enable ssh
+2. connect to network (wireless or ethernet) to get an IP address: RASPI-CONFIG -> System Options -> Wireless LAN
+3. configure login password: RASPI-CONFIG -> System Options -> Password
+4. enable ssh: RASPI-CONFIG -> System Options -> Interface Options -> SSH
 ```
 
 ```bash
